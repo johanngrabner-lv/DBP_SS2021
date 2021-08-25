@@ -1,5 +1,8 @@
-CREATE TABLE SpielerIn
+CREATE TABLE Player
 (
-  	Id INTEGER PRIMARY KEY AUTOINCREMENT,
-    Vorname VARCHAR(20)
- );
+	PlayerID INTEGER PRIMARY KEY AUTOINCREMENT,
+	Firstname VARCHAR(255),
+	Lastname VARCHAR(255),
+	Nickname Varchar(255),
+
+)
