@@ -1,0 +1,146 @@
+/*CREATE TABLE Player
+(
+	PlayerID INTEGER PRIMARY KEY AUTOINCREMENT,
+	Firstname VARCHAR(255),
+	Lastname VARCHAR(255),
+	Nickname Varchar(255)
+)
+INSERT INTO Player(Firstname, Lastname, NickName)
+VALUES('Johann','Grabner','Hans');
+
+SELECT * FROM Player;
+CREATE TABLE Game
+(
+	GameId INTEGER PRIMARY KEY AUTOINCREMENT,
+	GameName VARCHAR(255),
+	GameGenre VARCHAR(255), -- Constraint
+	MaxLevel INTEGER
+);
+
+CREATE TABLE GameHistory
+
+(
+
+    GameHistoryId INTEGER PRIMARY KEY AUTOINCREMENT,
+
+    GameId INTEGER NOT NULL,
+
+      PlayerId INTEGER NOT NULL,
+
+    GamePlayedOnUTC DATE NOT NULL,
+
+  FOREIGN KEY(GameId) REFERENCES Game(GameId),
+
+  FOREIGN KEY(PlayerId) REFERENCES Player(PlayerID)
+
+);
+
+
+
+INSERT INTO Game (GameName, GameGenre, MaxLevel)
+
+VALUES ("The Sims", "Simulation", 23),
+
+("Batman Arkham Asylum", "Adventure", 18),
+
+("Assassin's Creed: Valhalla", "Action", 400);
+
+
+SELECT * FROM Player;
+SELECT * FROM Game;
+
+INSERT INTO GameHistory(PlayerId, GameId, GamePlayedOnUTC)
+
+    VALUES (1, 1, '2021-08-25');
+
+	PRAGMA foreign_keys = ON;
+	SELECT * FROM GameHistory;
+
+	INSERT INTO GameHistory(PlayerId, GameId, GamePlayedOnUTC)
+
+    VALUES (1, 1, '2021-08-25');*/
+
+--DELETE FROM GameHistory
+--WHERE GamePlayedOnUTC != 2022;
+
+/*
+INSERT INTO GameHistory(PlayerId, GameId, GamePlayedOnUTC)
+
+    VALUES (1, 1, '2021-08-24');*/
+
+SELECT * FROM GameHistory;
+
+--DELETE FROM GAME WHERE GameID = 1;
+
+SELECT AVG(MaxLevel) AS AvgLevels FROM Game; --Column Alias
+
+/*
+CREATE TABLE LovedGames
+(
+	LovedGamesId INTEGER PRIMARY KEY AUTOINCREMENT,
+	PlayerId INTEGER, -- Foreign Key
+	GameId INTEGER, -- Foreign Key
+	Rank INTEGER
+);*/
+
+/*
+Insert into LovedGames(PlayerId,GameId,Rank) Values(1,2,100);
+Insert into LovedGames(PlayerId,GameId,Rank) Values(1,3,200);
+*/
+
+SELECT GameId, SUM(Rank) AS SumOfRanks
+FROM LovedGames
+GROUP BY GameId
+HAVING SUM(Rank)>100;
+
+SELECT * FROM Game;
+UPDATE Game
+SET MaxLevel=700
+WHERE GameId=1;
+SELECT * FROM Game;
+
+UPDATE Player
+SET lastName = "Braun"
+WHERE firstName= "Johann";
+
+
+
+SELECT SUM(Rank) AS SumOfRanks FROM LovedGames;
+
+Select 'mit Join';
+
+SELECT Player.Nickname, LovedGames.Rank
+FROM LovedGames
+INNER JOIN Player
+ON Player.PlayerID = LovedGames.PlayerID
+ORDER BY LovedGames.Rank;
+
+SELECT p.Nickname, l.Rank
+FROM LovedGames AS l
+INNER JOIN Player AS p
+ON p.PlayerID = l.PlayerID
+ORDER BY l.Rank;
+/*
+INSERT INTO Player(Firstname, Lastname, NickName)
+VALUES('Relindis','Lantzberg','RL');
+*/
+SELECT * FROM Player;
+
+SELECT p.Nickname, g.Gamename, l.Rank
+FROM LovedGames AS l
+INNER JOIN Player AS p
+ON p.PlayerID = l.PlayerID
+JOIN Game g
+ON g.GameId = l.GameId
+ORDER BY l.Rank;
+
+SELECT 'Outer Join Beispiel';
+
+SELECT p.Nickname, g.Gamename, l.Rank
+FROM Player AS p
+LEFT JOIN LovedGames AS l -- kein Equi sondern Outer(Left/Right)
+ON p.PlayerID = l.PlayerID
+LEFT JOIN Game g
+ON g.GameId = l.GameId
+ORDER BY l.Rank;
+

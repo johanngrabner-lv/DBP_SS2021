@@ -4,6 +4,12 @@ import java.sql.*;
 
 public class MyMain {
     public static void main(String[] args){
+
+        Person p=new Person(); //Objekt instanziieren
+
+        //Class.forName("campus02.dbp.Person");
+
+
         System.out.print("Hello Campus02");
        // createNewDatabase("t1.db");
       //  connect("t1.db");
