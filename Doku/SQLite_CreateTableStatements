@@ -3,6 +3,5 @@ CREATE TABLE Player
 	PlayerID INTEGER PRIMARY KEY AUTOINCREMENT,
 	Firstname VARCHAR(255),
 	Lastname VARCHAR(255),
-	Nickname Varchar(255),
-
+	Nickname Varchar(255)
 )
