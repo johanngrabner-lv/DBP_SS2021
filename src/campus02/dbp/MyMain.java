@@ -7,6 +7,7 @@ public class MyMain {
         System.out.print("Hello Campus02");
         createNewDatabase("t1.db");
         connect("t1.db");
+        createNewTable("t1.db");
 
     }
 
@@ -49,6 +50,33 @@ public class MyMain {
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
             }
+        }
+    }
+
+    public static void createNewTable(String fileName ) {
+        // SQLite connection string
+        String url = "jdbc:sqlite:C://sqlite/db/" +fileName;
+
+        // SQL statement for creating a new table
+        String sql = "CREATE TABLE IF NOT EXISTS warehouses (\n"
+                + "	id integer PRIMARY KEY,\n"
+                + "	name text NOT NULL,\n"
+                + "	capacity real\n"
+                + ");";
+
+        try (Connection conn = DriverManager.getConnection(url);
+             Statement stmt = conn.createStatement()) {
+            // create a new table
+            stmt.execute(sql);
+
+            String insStatement="INSERT INTO warehouses(id,name,capacity)";
+            insStatement  = insStatement + " Values(1,'test',100)";
+
+            stmt.execute(insStatement);
+
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
     }
 
