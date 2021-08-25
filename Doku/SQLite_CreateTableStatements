@@ -5,3 +5,36 @@ CREATE TABLE Player
 	Lastname VARCHAR(255),
 	Nickname Varchar(255)
 )
+
+--Lieblingsspielen -- Wiederholungsgruppen - 1. Normalform
+-- Atomar
+-- Wiederholungsgruppen auslagern
+
+CREATE TABLE LovedGames
+(
+	LovedGamesId INTEGER PRIMARY KEY AUTOINCREMENT,
+	PlayerId INTEGER, -- Foreign Key
+	GameId INTEGER, -- Foreign Key
+	Rank INTEGER
+)
+
+--Constraints, Einschränkung wird von der DB überprüft
+--Foreign Key Constraint - References
+--UNIQUE
+--NOT NULL
+--CHECK Action, Fun, "XYZ"
+
+CREATE TABLE Game
+(
+	GameId INTEGER PRIMARY KEY AUTOINCREMENT,
+	GameName VARCHAR(255),
+	GameGenre VARCHAR(255), -- Constraint
+	MaxLevel INTEGER
+)
+
+CREATE TABLE GameHistory
+(
+	GameHistoryINTEGER PRIMARY KEY AUTOINCREMENT,
+	GameId INTEGER, -- Foreign Key Constraint
+	GamePlayedOnUTC Date
+)
