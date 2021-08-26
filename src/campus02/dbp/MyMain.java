@@ -13,7 +13,28 @@ public class MyMain {
 
         MyDBHelper db=new MyDBHelper();
        // db.createGameTable("Donnerstag.db");
-        db.readAllGames("Donnerstag.db");
+        //db.readAllGames("Donnerstag.db");
+  //      db.readGamesFilteredByGenre("Action");
+//        db.readGamesFilteredByMaxLevel(120);
+        //db.readGamesOrderBy("MaxLevel");
+       // db.createPlayerTable();
+     //   db.readAllPlayers();
+       // db.readAllPlayersOrderedBy("Firstname");
+     //   db.insertGamePrepared("GamePrep","Action",700);
+//        db.readGamesFilteredByGenrePrepared("Action");
+
+        DBHelperTyped dbHelper =new DBHelperTyped();
+
+      /*  Game g=new Game();
+        g.setGameName("Game Typed");
+        g.setGameGenre("Action");
+        g.setMaxLevel(500);;
+        dbHelper.addGame(g);*/
+
+        Game gameFound = dbHelper.getGameById(1);
+        System.out.println(gameFound);
+
+        System.out.println(dbHelper.getAllGamesByGenre("Action"));
 
     }
 
