@@ -12,7 +12,8 @@ public class MyMain {
         */
 
         MyDBHelper db=new MyDBHelper();
-        db.createGameTable("Donnerstag.db");
+       // db.createGameTable("Donnerstag.db");
+        db.readAllGames("Donnerstag.db");
 
     }
 

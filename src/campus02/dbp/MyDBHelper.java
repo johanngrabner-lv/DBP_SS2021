@@ -1,9 +1,6 @@
 package campus02.dbp;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class MyDBHelper {
 
@@ -28,6 +25,35 @@ public class MyDBHelper {
             insStatement  = insStatement + " Values('Solitaire','Action',100)";
 
             stmt.execute(insStatement);
+
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public  void readAllGames(String fileName ) {
+        // SQLite connection string
+        String url = "jdbc:sqlite:C://sqlite/db/" +fileName;
+
+        // SQL statement for creating a new table
+        String sql = "SELECT * FROM GAME;";
+
+        try (Connection conn = DriverManager.getConnection(url);
+             Statement stmt = conn.createStatement()) {
+
+           ResultSet rs = stmt.executeQuery(sql);
+
+           rs.next();
+
+           String gameName= rs.getString(2);
+           gameName = rs.getString("GameName");
+            System.out.println(gameName);
+
+           while(rs.next()){
+               gameName = rs.getString("GameName");
+               System.out.println(gameName);
+           }
 
 
         } catch (SQLException e) {
