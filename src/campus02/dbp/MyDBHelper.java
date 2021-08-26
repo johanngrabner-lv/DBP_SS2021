@@ -44,6 +44,7 @@ public class MyDBHelper {
 
            ResultSet rs = stmt.executeQuery(sql);
 
+           /*
            rs.next();
 
            String gameName= rs.getString(2);
@@ -53,11 +54,31 @@ public class MyDBHelper {
            while(rs.next()){
                gameName = rs.getString("GameName");
                System.out.println(gameName);
-           }
+           }*/
+
+
+            while(rs.next()){
+                String gameName= rs.getString(2);
+                gameName = rs.getString("GameName");
+                gameName = rs.getString("GameName");
+                System.out.println(gameName);
+            }
 
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public void readGamesFilteredByGenre(string genre){
+
+    }
+
+    public void readGamesFlteredByMaxLevel(int maxLevel){+
+
+    }
+
+    public void readGamesOrderBy(string orderColumn){
+
     }
 }
