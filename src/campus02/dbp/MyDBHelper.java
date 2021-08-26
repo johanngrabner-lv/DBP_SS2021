@@ -66,6 +66,32 @@ public class MyDBHelper {
         helpReadSQLStatment(sql);
     }
 
+    public void readGamesFilteredByGenrePrepared(String genre){
+        System.out.println("readGamesFilteredByGenre");
+        String sql="SELECT * FROM GAME WHERE GameGenre = ? ";
+        helpReadSQLStatmentPrepared(sql, genre);
+    }
+
+    private void helpReadSQLStatmentPrepared(String sql, String genre){
+        System.out.println("\nSQLStatement Prepared: " + sql + "\n");
+        String url = "jdbc:sqlite:C://sqlite/db/donnerstag.db" ;
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1,genre);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                String gameName= rs.getString(2);
+                gameName = rs.getString("GameName");
+                gameName = rs.getString("GameName");
+                System.out.println(gameName + " MaxLevel: " + rs.getInt(("MaxLevel")));
+            }
+
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public void readGamesFilteredByMaxLevel(int maxLevel){
         System.out.println("readGamesFilteredByMaxLevel");
         String sql="SELECT * FROM GAME WHERE Maxlevel <" + maxLevel ;
