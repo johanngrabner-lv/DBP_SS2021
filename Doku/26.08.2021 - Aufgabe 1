@@ -1,0 +1,26 @@
+JDBC-Aufgabe Donnerstag 26.08.2021
+
+0. Neues Projekt - JDBCDonnertag
+0a. public static void main
+1. Neue Klasse mit dem Namen "DBHelper" für den Zugriff auf SQLite-DBs
+---Library SQLite referenzieren
+2. createGameTable("Donnerstag.db")
+
+CREATE TABLE Game
+(
+GameId INTEGER Primary Key AUTOINCREMENT,
+....
+...
+
+
+DbHelper db=new DbHelper();
+db.createGameTable("Donnerstag.db");
+System.out.println("Finished - Table was created");
+
+SQlite Studio überprüfen ob Datenbank erstellt wurde und ob Tabelle erstellt wurde
+
+...und Beispiel-Datensätze einfügen
+
+
+
+

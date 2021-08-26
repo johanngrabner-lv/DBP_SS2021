@@ -5,9 +5,10 @@ import java.sql.*;
 public class MyMain {
     public static void main(String[] args){
         System.out.print("Hello Campus02");
-        createNewDatabase("t1.db");
-        connect("t1.db");
-        createNewTable("t1.db");
+        String databasename="Donnerstag.db";
+        createNewDatabase(databasename);
+        connect(databasename);
+        createNewTable(databasename);
 
     }
 
@@ -37,9 +38,7 @@ public class MyMain {
             String url = "jdbc:sqlite:C:/sqlite/db/" + filename;
             // create a connection to the database
             conn = DriverManager.getConnection(url);
-
             System.out.println("Connection to SQLite has been established.");
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
