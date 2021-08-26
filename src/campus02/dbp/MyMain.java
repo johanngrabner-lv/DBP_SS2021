@@ -4,11 +4,15 @@ import java.sql.*;
 
 public class MyMain {
     public static void main(String[] args){
-        System.out.print("Hello Campus02");
+      /*  System.out.print("Hello Campus02");
         String databasename="Donnerstag.db";
         createNewDatabase(databasename);
         connect(databasename);
         createNewTable(databasename);
+        */
+
+        MyDBHelper db=new MyDBHelper();
+        db.createGameTable("Donnerstag.db");
 
     }
 

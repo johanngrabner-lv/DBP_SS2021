@@ -19,7 +19,9 @@ System.out.println("Finished - Table was created");
 
 SQlite Studio überprüfen ob Datenbank erstellt wurde und ob Tabelle erstellt wurde
 
-...und Beispiel-Datensätze einfügen
+...über GUI Beispiel-Datensätze einfügen
+
+10:20 Uhr gemeinsame Auflösung
 
 
 
