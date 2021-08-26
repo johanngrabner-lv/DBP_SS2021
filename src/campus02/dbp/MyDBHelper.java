@@ -178,4 +178,25 @@ public class MyDBHelper {
         }
     }
 
+
+    public  void insertGamePrepared(String gameName, String gameGenre, int maxLevel){
+
+        String url = "jdbc:sqlite:C://sqlite/db/donnerstag.db" ;
+        String insertSQL="";
+        insertSQL = "INSERT INTO Game(GameName, GameGenre, MaxLevel) ";
+        insertSQL += " Values(?,?,?)";
+        System.out.println("\nSQLStatement Prepared: " + insertSQL + "\n");
+
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement stmt = conn.prepareStatement(insertSQL)) {
+            stmt.setString(1,gameName);
+            stmt.setString(2,gameGenre);
+            stmt.setInt(3,maxLevel);
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 }
