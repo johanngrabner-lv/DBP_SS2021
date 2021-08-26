@@ -1,6 +1,7 @@
 package campus02.dbp;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DBHelperTyped {
 
@@ -26,6 +27,28 @@ public class DBHelperTyped {
             System.out.println(e.getMessage());
         }
     }
+
+    public ArrayList<Game> getAllGamesByGenre(String genre){
+        ArrayList<Game> meineSpiele =new ArrayList<Game>();
+        String getGameById = "SELECT * FROM Game WHERE GameGenre = ?";
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement preparedStatement = conn.prepareStatement(getGameById)) {
+            preparedStatement.setString(1, genre);
+
+            ResultSet rs = preparedStatement.executeQuery();
+            while(rs.next()){
+                int gameId=rs.getInt("GameId");
+                Game g = getGameById(gameId);
+                meineSpiele.add(g);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+            return  meineSpiele;
+        }
+
 
 
     public Game getGameById(int gameId){
