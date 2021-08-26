@@ -70,15 +70,40 @@ public class MyDBHelper {
         }
     }
 
-    public void readGamesFilteredByGenre(string genre){
-
+    public void readGamesFilteredByGenre(String genre){
+            System.out.println("readGamesFilteredByGenre");
+            String sql="SELECT * FROM GAME WHERE GameGenre ='" + genre + "'";
+        helpReadSQLStatment(sql);
     }
 
-    public void readGamesFlteredByMaxLevel(int maxLevel){+
-
+    public void readGamesFilteredByMaxLevel(int maxLevel){
+        System.out.println("readGamesFilteredByMaxLevel");
+        String sql="SELECT * FROM GAME WHERE Maxlevel <" + maxLevel ;
+        helpReadSQLStatment(sql);
     }
 
-    public void readGamesOrderBy(string orderColumn){
+    public void readGamesOrderBy(String orderColumn){
+        System.out.println("readGamesOrderBy");
+        String sql="SELECT * FROM GAME ORDER BY " + orderColumn ;
+        helpReadSQLStatment(sql);
+    }
 
+    private void helpReadSQLStatment(String sql){
+        System.out.println("\nSQLStatement: " + sql + "\n");
+        String url = "jdbc:sqlite:C://sqlite/db/donnerstag.db" ;
+        try (Connection conn = DriverManager.getConnection(url);
+             Statement stmt = conn.createStatement()) {
+            ResultSet rs = stmt.executeQuery(sql);
+            while(rs.next()){
+                String gameName= rs.getString(2);
+                gameName = rs.getString("GameName");
+                gameName = rs.getString("GameName");
+                System.out.println(gameName + " MaxLevel: " + rs.getInt(("MaxLevel")));
+            }
+
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
