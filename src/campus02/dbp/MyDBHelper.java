@@ -100,14 +100,56 @@ public class MyDBHelper {
     //Aufgabe bis 12:00 Uhr
     //Auflösung 13:00 Uhr
     public void createPlayerTable(){
-        //Tabelle erzeugen
-        //SQLLite Studio --- Players über die GUI hinzufügen
+        // SQL statement for creating a new table
+        String sql = "CREATE TABLE Player (\n"
+                + "	PlayerId INTEGER PRIMARY KEY AUTOINCREMENT,\n"
+                + "	Firstname VARCHAR(255),\n"
+                + "	Lastname VARCHAR(255), \n"
+                + "	NickName Varchar(255) \n"
+                + ");";
+
+        createTable(sql);
     }
 
     public void readAllPlayers(){
-
+        String sqlSelect = "SELECT * FROM PLAYER;";
+        displayPlayer(sqlSelect);
     }
     public void readAllPlayersOrderedBy(String orderColumn){
-
+        String sqlSelect = "SELECT * FROM PLAYER ORDER BY " + orderColumn + " DESC";
+        displayPlayer(sqlSelect);
     }
+
+    private  void createTable(String createTableSQLText ) {
+
+        String url = "jdbc:sqlite:C://sqlite/db/donnerstag.db" ;
+
+        try (Connection conn = DriverManager.getConnection(url);
+             Statement stmt = conn.createStatement()) {
+
+            stmt.execute(createTableSQLText);
+
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void displayPlayer(String sql){
+        System.out.println("\nSQLStatement: " + sql + "\n");
+        String url = "jdbc:sqlite:C://sqlite/db/donnerstag.db" ;
+        try (Connection conn = DriverManager.getConnection(url);
+             Statement stmt = conn.createStatement()) {
+            ResultSet rs = stmt.executeQuery(sql);
+            while(rs.next()){
+
+                System.out.println(rs.getString(("Firstname")) + " Nickname: " + rs.getString(("Nickname")));
+            }
+
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 }
