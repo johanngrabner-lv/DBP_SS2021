@@ -37,30 +37,20 @@ public class MyDBHelper {
         String url = "jdbc:sqlite:C://sqlite/db/" +fileName;
 
         // SQL statement for creating a new table
-        String sql = "SELECT * FROM GAME;";
+        String sql = "SELECT MaxLevel, GameGenre, GameId, GameName FROM GAME;";
 
         try (Connection conn = DriverManager.getConnection(url);
              Statement stmt = conn.createStatement()) {
 
            ResultSet rs = stmt.executeQuery(sql);
 
-           /*
-           rs.next();
-
-           String gameName= rs.getString(2);
-           gameName = rs.getString("GameName");
-            System.out.println(gameName);
-
-           while(rs.next()){
-               gameName = rs.getString("GameName");
-               System.out.println(gameName);
-           }*/
-
-
             while(rs.next()){
-                String gameName= rs.getString(2);
+                String gameName= "";
+                gameName = rs.getString(2);
                 gameName = rs.getString("GameName");
-                gameName = rs.getString("GameName");
+
+                int maxLevel = rs.getInt("MaxLevel");
+
                 System.out.println(gameName);
             }
 
@@ -105,5 +95,19 @@ public class MyDBHelper {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    //Aufgabe bis 12:00 Uhr
+    //Auflösung 13:00 Uhr
+    public void createPlayerTable(){
+        //Tabelle erzeugen
+        //SQLLite Studio --- Players über die GUI hinzufügen
+    }
+
+    public void readAllPlayers(){
+
+    }
+    public void readAllPlayersOrderedBy(String orderColumn){
+
     }
 }
