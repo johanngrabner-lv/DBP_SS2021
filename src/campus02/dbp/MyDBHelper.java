@@ -203,6 +203,20 @@ public class MyDBHelper {
     public void displayGameWithMaxLevelBetweenAandB(int a, int b){
         //PreoparedStatement
         //Auflösung 14:05 Uhr
+
+        String getGames = "SELECT * FROM Game WHERE MaxLevel BETWEEN ? and ?";
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement preparedStatement = conn.prepareStatement(getGames)) {
+
+            preparedStatement.setInt(1, a);
+            preparedStatement.setInt(2, b);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                System.out.println(rs.getString("GameName"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 }
