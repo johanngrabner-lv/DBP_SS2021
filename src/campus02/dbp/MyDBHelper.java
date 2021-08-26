@@ -194,9 +194,15 @@ public class MyDBHelper {
             stmt.setInt(3,maxLevel);
             stmt.executeUpdate();
 
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public void displayGameWithMaxLevelBetweenAandB(int a, int b){
+        //PreoparedStatement
+        //Auflösung 14:05 Uhr
     }
 
 }
