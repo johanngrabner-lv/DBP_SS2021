@@ -23,6 +23,16 @@ public class Game {
 
     private String GameName;
 
+    @Override
+    public String toString() {
+        return "Game{" +
+                "GameId=" + GameId +
+                ", GameName='" + GameName + '\'' +
+                ", GameGenre='" + GameGenre + '\'' +
+                ", MaxLevel=" + MaxLevel +
+                '}';
+    }
+
     public String getGameGenre() {
         return GameGenre;
     }

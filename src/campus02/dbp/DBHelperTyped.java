@@ -1,9 +1,6 @@
 package campus02.dbp;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class DBHelperTyped {
 
@@ -30,8 +27,30 @@ public class DBHelperTyped {
         }
     }
 
-    /*
-    public Game getGameById(int gameId){
 
-    }*/
+    public Game getGameById(int gameId){
+        Game g =new Game();
+
+        String getGameById = "SELECT * FROM Game WHERE GameId = ?";
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement preparedStatement = conn.prepareStatement(getGameById)) {
+            preparedStatement.setInt(1, gameId);
+
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+               g.setGameId(gameId);
+               g.setGameName(rs.getString("GameName"));
+                g.setGameGenre(rs.getString("GameGenre"));
+                g.setMaxLevel(rs.getInt("MaxLevel"));
+            } else
+            {
+                g.setGameName("not found");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return g;
+
+    }
 }

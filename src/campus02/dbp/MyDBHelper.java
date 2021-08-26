@@ -203,7 +203,7 @@ public class MyDBHelper {
     public void displayGameWithMaxLevelBetweenAandB(int a, int b){
         //PreoparedStatement
         //Auflösung 14:05 Uhr
-
+        String url = "jdbc:sqlite:C://sqlite/db/donnerstag.db" ;
         String getGames = "SELECT * FROM Game WHERE MaxLevel BETWEEN ? and ?";
         try (Connection conn = DriverManager.getConnection(url);
              PreparedStatement preparedStatement = conn.prepareStatement(getGames)) {
