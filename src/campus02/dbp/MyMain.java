@@ -29,12 +29,30 @@ public class MyMain {
         g.setGameName("Game Typed");
         g.setGameGenre("Action");
         g.setMaxLevel(500);;
-        dbHelper.addGame(g);*/
+        dbHelper.addGame(g);
+
 
         Game gameFound = dbHelper.getGameById(1);
         System.out.println(gameFound);
 
         System.out.println(dbHelper.getAllGamesByGenre("Action"));
+        */
+
+        /*
+        Game g=new Game();
+        g.setGameName("Game Typed Autoincrement");
+        g.setGameGenre("Action");
+        g.setMaxLevel(500);;
+        dbHelper.addGameWithAutoincrementValue(g);
+        System.out.println(g);
+        */
+
+        Game g1 = dbHelper.getGameById(1);
+        g1.setGameName("Geänderter Name");
+        g1.setMaxLevel(700);
+        g1.setGameGenre("BoardGame");
+        dbHelper.updateGame(g1);
+
 
     }
 

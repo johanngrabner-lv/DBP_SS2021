@@ -13,6 +13,44 @@ public class DBHelperTyped {
         String insertSQL="";
         insertSQL = "INSERT INTO Game(GameName, GameGenre, MaxLevel) ";
         insertSQL += " Values(?,?,?)";
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement stmt = conn.prepareStatement(insertSQL)) {
+            stmt.setString(1,g.getGameName());
+            stmt.setString(2,g.getGameGenre());
+            stmt.setInt(3,g.getMaxLevel());
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void updateGame(Game g){
+
+        String updateSQL="";
+        updateSQL = "UPDATE Game SET ";
+        updateSQL += " GameName=?, ";
+        updateSQL += " GameGenre=?, ";
+        updateSQL += " MaxLevel=? ";
+        updateSQL += " WHERE GameId=? ";
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement stmt = conn.prepareStatement(updateSQL)) {
+            stmt.setString(1,g.getGameName());
+            stmt.setString(2,g.getGameGenre());
+            stmt.setInt(3,g.getMaxLevel());
+            stmt.setInt(4,g.getGameId());
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void addGameWithAutoincrementValue(Game g){
+
+        String insertSQL="";
+        insertSQL = "INSERT INTO Game(GameName, GameGenre, MaxLevel) ";
+        insertSQL += " Values(?,?,?)";
 
 
         try (Connection conn = DriverManager.getConnection(url);
@@ -26,6 +64,8 @@ public class DBHelperTyped {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+
+        g.setGameId(getLastInsertRowid());
     }
 
     public ArrayList<Game> getAllGamesByGenre(String genre){
@@ -75,5 +115,28 @@ public class DBHelperTyped {
 
         return g;
 
+    }
+
+    public int getLastInsertRowid()
+    {
+        int lastId=0;
+        String sqlText = "SELECT last_insert_rowid() as rowid;";
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement stmt = conn.prepareStatement(sqlText))
+        {
+
+        ResultSet rs = null;
+
+            rs = stmt.executeQuery(sqlText);
+            rs.next();
+            lastId=rs.getInt("rowid");
+            rs.close();
+            stmt.close();
+            //con.close();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return  lastId;
     }
 }
