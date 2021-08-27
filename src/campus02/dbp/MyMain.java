@@ -78,6 +78,10 @@ public class MyMain {
 
        // Player foundPlayer = dbHelper.getPlayerById(2);
 
+        Player p2 = dbHelper.getPlayerById(2);
+        ArrayList<LovedGames> gamesForPlayer2 = p2.getMyLovedGames();
+
+
     }
 
     public static void createNewDatabase(String fileName) {
@@ -157,6 +161,32 @@ public class MyMain {
     /*Agenda für Dienstag - Prüfungsvorbereitungsbeispiel
     Agenda Mittwoch -Auflöung
      */
+
+    /* Beispiel-Aufgaben
+        LovedGames -- Create Table, addLovedGames, updateLovedGames, deleteLovedGames
+
+        Car --> 4 Wheels, Engine, Seats
+        Player --- List of LovedGames and a List of PlayedGames
+        Aggregation / Komposition, Aggregate / Composite
+        ArrayList<LovedGames> lg = p1.getLovedGames();
+        SELECT * FROM LovedGames WHERE PlayerID = ?
+        ArrayList<GameHistory> gh = p1.getGameHistory();
+        Player pHighestNumberPlayedGames = dbHelper.getPlayerHighestNumberPlayedGames();
+     */
+
+/*CREATE TABLE LovedGames (
+    LovedGamesId INTEGER PRIMARY KEY,
+    PlayerId     INTEGER REFERENCES Player (PlayerId),
+    GameId       INTEGER REFERENCES Game (GameId),
+    PlayDate     DATE
+);
+
+Aggregation in SQL
+SELECT p.Firstname, l.* FROM Player p
+JOIN LovedGames l
+ON p.PlayerId=l.PlayerId
+ */
+
 
 
 }

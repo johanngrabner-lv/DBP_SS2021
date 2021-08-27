@@ -59,5 +59,13 @@ public class Player {
     private String Lastname;
     private String Nickname;
 
+    ArrayList<LovedGames> myLovedGames;
 
+    public ArrayList<LovedGames> getMyLovedGames() {
+        return myLovedGames;
+    }
+
+    public void setMyLovedGames(ArrayList<LovedGames> myLovedGames) {
+        this.myLovedGames = myLovedGames;
+    }
 }
