@@ -163,4 +163,17 @@ public class DBHelperTyped {
         }
         return  lastId;
     }
+
+    public void addPlayer(Player p){
+
+    }
+    //PlayerId -- WHERE
+    public void updatePlayer(Player p){
+
+    }
+
+    public Player getPlayerById(int playerId){
+
+    }
+
 }
