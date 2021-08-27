@@ -1,14 +1,14 @@
-/*CREATE TABLE Player
+/*CREATE TABLE campus02.dbp.Player
 (
 	PlayerID INTEGER PRIMARY KEY AUTOINCREMENT,
 	Firstname VARCHAR(255),
 	Lastname VARCHAR(255),
 	Nickname Varchar(255)
 )
-INSERT INTO Player(Firstname, Lastname, NickName)
+INSERT INTO campus02.dbp.Player(Firstname, Lastname, NickName)
 VALUES('Johann','Grabner','Hans');
 
-SELECT * FROM Player;
+SELECT * FROM campus02.dbp.Player;
 CREATE TABLE Game
 (
 	GameId INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -31,7 +31,7 @@ CREATE TABLE GameHistory
 
   FOREIGN KEY(GameId) REFERENCES Game(GameId),
 
-  FOREIGN KEY(PlayerId) REFERENCES Player(PlayerID)
+  FOREIGN KEY(PlayerId) REFERENCES campus02.dbp.Player(PlayerID)
 
 );
 
@@ -46,7 +46,7 @@ VALUES ("The Sims", "Simulation", 23),
 ("Assassin's Creed: Valhalla", "Action", 400);
 
 
-SELECT * FROM Player;
+SELECT * FROM campus02.dbp.Player;
 SELECT * FROM Game;
 
 INSERT INTO GameHistory(PlayerId, GameId, GamePlayedOnUTC)
@@ -99,7 +99,7 @@ SET MaxLevel=700
 WHERE GameId=1;
 SELECT * FROM Game;
 
-UPDATE Player
+UPDATE campus02.dbp.Player
 SET lastName = "Braun"
 WHERE firstName= "Johann";
 
@@ -109,26 +109,26 @@ SELECT SUM(Rank) AS SumOfRanks FROM LovedGames;
 
 Select 'mit Join';
 
-SELECT Player.Nickname, LovedGames.Rank
+SELECT campus02.dbp.Player.Nickname, LovedGames.Rank
 FROM LovedGames
-INNER JOIN Player
-ON Player.PlayerID = LovedGames.PlayerID
+INNER JOIN campus02.dbp.Player
+ON campus02.dbp.Player.PlayerID = LovedGames.PlayerID
 ORDER BY LovedGames.Rank;
 
 SELECT p.Nickname, l.Rank
 FROM LovedGames AS l
-INNER JOIN Player AS p
+INNER JOIN campus02.dbp.Player AS p
 ON p.PlayerID = l.PlayerID
 ORDER BY l.Rank;
 /*
-INSERT INTO Player(Firstname, Lastname, NickName)
+INSERT INTO campus02.dbp.Player(Firstname, Lastname, NickName)
 VALUES('Relindis','Lantzberg','RL');
 */
-SELECT * FROM Player;
+SELECT * FROM campus02.dbp.Player;
 
 SELECT p.Nickname, g.Gamename, l.Rank
 FROM LovedGames AS l
-INNER JOIN Player AS p
+INNER JOIN campus02.dbp.Player AS p
 ON p.PlayerID = l.PlayerID
 JOIN Game g
 ON g.GameId = l.GameId
@@ -137,7 +137,7 @@ ORDER BY l.Rank;
 SELECT 'Outer Join Beispiel';
 
 SELECT p.Nickname, g.Gamename, l.Rank
-FROM Player AS p
+FROM campus02.dbp.Player AS p
 LEFT JOIN LovedGames AS l -- kein Equi sondern Outer(Left/Right)
 ON p.PlayerID = l.PlayerID
 LEFT JOIN Game g

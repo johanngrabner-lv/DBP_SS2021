@@ -48,6 +48,7 @@ public class MyMain {
         */
 
 
+        /*
         Game g1 = dbHelper.getGameById(1);
         g1.setGameName("Geänderter Name");
         g1.setMaxLevel(700);
@@ -68,7 +69,14 @@ public class MyMain {
 
 
         int rowsAffected = dbHelper.incrementMaxLevelByXForGenreY(50,"Action");
+*/
+        Player newPlayer =
+                new Player(0,"Luisa","De Franco","LF");
 
+        Player pInserted = dbHelper.addPlayer(newPlayer);
+       // dbHelper.updatePlayer(newPlayer);
+
+       // Player foundPlayer = dbHelper.getPlayerById(2);
 
     }
 

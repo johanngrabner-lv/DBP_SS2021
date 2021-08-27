@@ -127,7 +127,7 @@ public class MyDBHelper {
     //Auflösung 13:00 Uhr
     public void createPlayerTable(){
         // SQL statement for creating a new table
-        String sql = "CREATE TABLE Player (\n"
+        String sql = "CREATE TABLE campus02.dbp.Player (\n"
                 + "	PlayerId INTEGER PRIMARY KEY AUTOINCREMENT,\n"
                 + "	Firstname VARCHAR(255),\n"
                 + "	Lastname VARCHAR(255), \n"

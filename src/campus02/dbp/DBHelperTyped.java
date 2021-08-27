@@ -164,16 +164,85 @@ public class DBHelperTyped {
         return  lastId;
     }
 
-    public void addPlayer(Player p){
+    public Player addPlayer(Player p){
+        //1. Connection aufbauen
+        //2. Prepared Statement "holen"
+        //3. Parameter befüllen
+        //4. An DB "schicken" -- executeUpdate
+        //5. die neu vergebenen ID einlesen
+        String insertSQL="";
+        insertSQL = "INSERT INTO Player(Firstname, Lastname, NickName) ";
+        insertSQL += " Values(?,?,?)";
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement stmt = conn.prepareStatement(insertSQL)) {
+            stmt.setString(1,p.getFirstname());
+            stmt.setString(2,p.getLastname());
+            stmt.setString(3,p.getNickname());
+            int affectedRows=0;
+            affectedRows = stmt.executeUpdate();
 
+
+            String sqlText = "SELECT last_insert_rowid() as rowid;";
+            PreparedStatement stmtAutoincrement = conn.prepareStatement(sqlText);
+            ResultSet rs = stmtAutoincrement.executeQuery();
+            rs.next();
+            int autoincrementValue=rs.getInt("rowid");
+            p.setPlayerId(autoincrementValue);
+            stmtAutoincrement.close();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        //TODO - fill the PlayerI
+       // Fehler - muss in der gleichen Connection abgefragt werden
+        // int newPlayerId = getLastInsertRowid();
+        //p.setPlayerId(newPlayerId);
+        return p;
     }
     //PlayerId -- WHERE
     public void updatePlayer(Player p){
+        String updateSQL="";
+        updateSQL = "UPDATE Player SET ";
+        updateSQL += " Firstname = ?, ";
+        updateSQL += " Lastname = ?, ";
+        updateSQL += " Nickname = ? ";
+        updateSQL += " WHERE PlayerId = ? ";
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement stmt = conn.prepareStatement(updateSQL)) {
+            stmt.setString(1,p.getFirstname());
+            stmt.setString(2,p.getLastname());
+            stmt.setString(3,p.getNickname());
+            stmt.setInt(4,p.getPlayerId());
+            int affectedRows=0;
+            affectedRows = stmt.executeUpdate();
 
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public Player getPlayerById(int playerId){
+        Player p =new Player();
+        String getGameById = "SELECT * FROM Player WHERE PlayerId = ?";
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement preparedStatement = conn.prepareStatement(getGameById)) {
+            preparedStatement.setInt(1, playerId);
 
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+              p.setPlayerId(rs.getInt("PlayerId"));
+              p.setFirstname(rs.getString("Firstname"));
+              p.setLastname(rs.getString("Lastname"));
+               p.setNickname(rs.getString("NickName"));
+            } else
+            {
+
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return p;
     }
 
 }
