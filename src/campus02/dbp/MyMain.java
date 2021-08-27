@@ -147,4 +147,16 @@ public class MyMain {
         }
     }
 
+    /* Agenda für Montag -
+    Wiederholung und offenen Fragen
+    - Transactions
+    * Metadata
+    * DAL - Data Access Layer - Pattern
+    * Null-Values, JOINS Aggregation
+     */
+    /*Agenda für Dienstag - Prüfungsvorbereitungsbeispiel
+    Agenda Mittwoch -Auflöung
+     */
+
+
 }

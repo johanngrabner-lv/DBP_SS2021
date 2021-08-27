@@ -141,6 +141,7 @@ public class DBHelperTyped {
 
     }
 
+    //ERROR
     public int getLastInsertRowid()
     {
         int lastId=0;
@@ -189,6 +190,7 @@ public class DBHelperTyped {
             int autoincrementValue=rs.getInt("rowid");
             p.setPlayerId(autoincrementValue);
             stmtAutoincrement.close();
+            rs.close();
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
