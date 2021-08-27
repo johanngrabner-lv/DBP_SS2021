@@ -47,14 +47,25 @@ public class MyMain {
         System.out.println(g);
         */
 
-        /*
+
         Game g1 = dbHelper.getGameById(1);
         g1.setGameName("Geänderter Name");
         g1.setMaxLevel(700);
         g1.setGameGenre("BoardGame");
-        dbHelper.updateGame(g1);
+        g1.setGameId(0);
+        int shouldBeOne = dbHelper.updateGame(g1);
+        if (shouldBeOne==0){
+            System.out.println("Game was not found");
+        }
+        if (shouldBeOne>1){
+            System.out.println("More than one game with same id");
+        }
 
-         */
+        if (shouldBeOne==1){
+            System.out.println("Game was succesfully updated");
+        }
+
+
 
         int rowsAffected = dbHelper.incrementMaxLevelByXForGenreY(50,"Action");
 

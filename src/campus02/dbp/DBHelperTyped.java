@@ -25,8 +25,9 @@ public class DBHelperTyped {
         }
     }
 
-    public void updateGame(Game g){
+    public int updateGame(Game g){
 
+        int affectedRows=0;
         String updateSQL="";
         updateSQL = "UPDATE Game SET ";
         updateSQL += " GameName=?, ";
@@ -39,11 +40,12 @@ public class DBHelperTyped {
             stmt.setString(2,g.getGameGenre());
             stmt.setInt(3,g.getMaxLevel());
             stmt.setInt(4,g.getGameId());
-            stmt.executeUpdate();
+            affectedRows= stmt.executeUpdate();
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+        return  affectedRows;
     }
 
     public int incrementMaxLevelByXForGenreY(int incrementValue, String genre){
