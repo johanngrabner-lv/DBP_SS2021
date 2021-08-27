@@ -46,6 +46,28 @@ public class DBHelperTyped {
         }
     }
 
+    public int incrementMaxLevelByXForGenreY(int incrementValue, String genre){
+        int affectedRows = 0;
+        String updateSQL="";
+        updateSQL = "UPDATE Game SET ";
+        updateSQL += " MaxLevel = MaxLevel + ? ";
+        updateSQL += " WHERE GameGenre = ? ";
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement stmt = conn.prepareStatement(updateSQL)) {
+            stmt.setInt(1,incrementValue);
+            stmt.setString(2,genre);
+
+            affectedRows = stmt.executeUpdate();
+            return affectedRows;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return affectedRows;
+    }
+
+
+
     public void addGameWithAutoincrementValue(Game g){
 
         String insertSQL="";
