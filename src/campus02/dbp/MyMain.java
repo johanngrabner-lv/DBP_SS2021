@@ -215,3 +215,36 @@ ON p.PlayerId=l.PlayerId
 
 
 }
+
+//Aufgabenbeschreibung 30.08.2021
+
+
+Table:
+GameLanguagesAndAge
+
+GameLanguagesAndAgeId
+GameId (INTEGER)
+NameDeutsch (VARCHAR(255)) Solitair
+NameEnglish NULL
+NameSpanisch solitario
+MinAge (decimal)
+
+Class: GameLanguagesAndAge
+Table: GameLanguagesAndAge (Studio oder DDL)
+
+addGameLanguagesAndAge(GameLanguagesAndAge gl)
+Namen können auch null sein
+
+ArrayList<NameLanguagesAndAge> nameLanguagesAndAge;
+
+Falls NameXYZ NULL --> Ausgabe: Deutsch - "Eintrag unbekannt"
+        Alter: 9,5
+
+Bitte auch die Metadatan für diese Tabelle ausgeben
+
+
+
+
+
+
+
