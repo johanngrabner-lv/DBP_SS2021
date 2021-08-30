@@ -262,6 +262,31 @@ Bitte auch die Metadatan für diese Tabelle ausgeben
 
 */
 
+/*
+1.)Table Player um die Spalte "POINTS" (decimal) erweitern
+ALTER TABLE equipment
+ADD COLUMN POINTS decimal;
+
+2.) Alle bekommen einen POINTS von Euro 100
+
+UPDATE Player SET POINTS = 100  --- WHERE Lastname='Grabner'
+
+3.) void transferPointsFromUserAToB(1,4,50);
+Player 1 "schenkt" Player 4  insgesamt 30 Punkte
+Player 1: 70
+Player 2: 130
+
+UPDATE Player SET Points = Points - 30 Where PlayerId=1
+UPDATE Player SET Points = Points + 30 Where PlayerId=2
+
+Nach dem Update überprüfen ob Points von Player A > 0
+wenn nicht, dann Transaction zurückrollen
+
+
+ */
+
+
+
 
 
 
