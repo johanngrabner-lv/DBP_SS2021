@@ -269,4 +269,34 @@ public class DBHelperTyped {
 
     }
 
+    public int joinLovedGame(Game g, Player p, int l) { //int lovedGames?
+        String selectSQL = "";
+        int rank=0;
+        selectSQL = "SELECT p.Nickname, l.Rank, g.GameName, l.Rank " +
+                "FROM LovedGames AS l " +
+                "INNER JOIN Player AS p " +
+                "ON p.PlayerID = l.PlayerID " +
+                "JOIN Game g " +
+                "ON g.GameID = l.GameID";
+        selectSQL += " WHERE g.GameID=? ";
+        selectSQL += " AND p.PlayerID=? ";
+        //selectSQL += " AND LovedGamesID=? ";
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement stmt = conn.prepareStatement(selectSQL)) {
+            stmt.setInt(1, g.getGameId());
+            stmt.setInt(2, p.getPlayerId());
+            //stmt.setInt(3, l.getLovedGamesID());
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()){
+                rank=rs.getInt("Rank");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return rank;
+    }
+
+
 }
