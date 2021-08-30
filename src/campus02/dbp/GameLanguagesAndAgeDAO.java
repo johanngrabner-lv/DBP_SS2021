@@ -149,4 +149,35 @@ public class GameLanguagesAndAgeDAO {
         } catch (SQLException ex) {
         }
     }
+
+    public void printMetaDataInfo(){
+        String selectSQL = "";
+        selectSQL = "SELECT * FROM GameLanguagesAndAge";
+
+        try {
+            Connection conn = DriverManager.getConnection(connectionString);
+            PreparedStatement stmt = conn.prepareStatement(selectSQL);
+            ResultSet rs = stmt.executeQuery();
+           ResultSetMetaData meta = rs.getMetaData();
+
+           System.out.println("Metdaten: \n Spalten: \n" + meta.getColumnCount() + "\n");
+            int numerics = 0;
+
+            for ( int i = 1; i <= meta.getColumnCount(); i++ )
+            {
+                System.out.printf( "%-20s %-20s%n", meta.getColumnLabel( i ),
+                        meta.getColumnTypeName( i ) );
+
+                if ( meta.isSigned( i ) )
+                    numerics++;
+            }
+
+            System.out.println();
+            System.out.println( "Spalten: " + meta.getColumnCount() +
+                    ", Numerisch: " + numerics );
+
+            rs.close();
+        } catch (SQLException ex) {
+        }
+    }
 }

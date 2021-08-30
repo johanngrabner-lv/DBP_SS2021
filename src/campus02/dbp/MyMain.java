@@ -120,7 +120,10 @@ public class MyMain {
         //gDAO.save();
         System.out.println("17 Inserted");
 
-        gDAO.printInfo();
+        //gDAO.printInfo();
+
+        gDAO.printMetaDataInfo();
+
     }
 
     public static void createNewDatabase(String fileName) {
