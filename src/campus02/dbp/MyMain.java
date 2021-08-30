@@ -107,6 +107,8 @@ public class MyMain {
 
         dbHelper.printMetdataData();
         */
+
+        /*
         GameLanguagesAndAgeDAO gDAO =new GameLanguagesAndAgeDAO();
 
        // gDAO.createTable();
@@ -123,6 +125,10 @@ public class MyMain {
         //gDAO.printInfo();
 
         gDAO.printMetaDataInfo();
+
+        */
+     //   dbHelper.addPointsToPlayerAndInitialize();
+        dbHelper.transferPoints(1,5,70);
 
     }
 

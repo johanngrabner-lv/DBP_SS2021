@@ -26,6 +26,16 @@ public class Player {
                 '}';
     }
 
+    public double getPoints() {
+        return points;
+    }
+
+    public void setPoints(double points) {
+        this.points = points;
+    }
+
+    private double points;
+
     public int getPlayerId() {
         return PlayerId;
     }

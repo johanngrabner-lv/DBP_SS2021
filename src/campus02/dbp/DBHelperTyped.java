@@ -236,6 +236,7 @@ public class DBHelperTyped {
               p.setFirstname(rs.getString("Firstname"));
               p.setLastname(rs.getString("Lastname"));
                p.setNickname(rs.getString("NickName"));
+               p.setPoints(rs.getDouble("Points"));
             } else
             {
 
@@ -328,6 +329,79 @@ public class DBHelperTyped {
             System.out.println(e.getMessage());
         }
 
+
+    }
+
+    public  void addPointsToPlayerAndInitialize() {
+
+        // SQL statement for creating a new table
+        String createTableSql = "ALTER TABLE Player\n" +
+                "ADD COLUMN POINTS decimal;";
+
+        String updateAllPlayers = "UPDATE Player SET POINTS = 100";
+
+        try (Connection conn = DriverManager.getConnection(url);
+             Statement stmt = conn.createStatement()) {
+            stmt.execute(createTableSql);
+            stmt.executeUpdate(updateAllPlayers);
+
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void transferPoints(int playerAId, int playerBId, double points){
+
+        int affectedRows=0;
+        String updateSQL1="";
+        updateSQL1 = "UPDATE Player SET ";
+        updateSQL1 += " Points = Points - ? ";
+        updateSQL1 += " WHERE PlayerId = ? ";
+
+        String updateSQL2="";
+        updateSQL2 = "UPDATE Player SET ";
+        updateSQL2 += " Points = Points + ? ";
+        updateSQL2 += " WHERE PlayerId = ? ";
+
+        String selectPlayer1 = "SELECT * FROM Player WHERE PlayerId=?";
+
+
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement stmt1 = conn.prepareStatement(updateSQL1);
+             PreparedStatement stmt2 = conn.prepareStatement(updateSQL2);
+             PreparedStatement stmtSelectPlayer = conn.prepareStatement(selectPlayer1);
+             ) {
+            stmt1.setInt(2, playerAId);
+            stmt1.setDouble(1, points);
+
+            stmt2.setInt(2, playerBId);
+            stmt2.setDouble(1, points);
+
+            stmtSelectPlayer.setInt(1,playerAId);
+
+            conn.setAutoCommit(false);
+            stmt1.executeUpdate();
+            stmt2.executeUpdate();
+
+           // Player p1 = getPlayerById(playerAId);
+            ResultSet rs = stmtSelectPlayer.executeQuery();
+            rs.next();
+            double newPoints = rs.getDouble("Points");
+
+
+
+            if (newPoints>=0){
+                conn.commit();
+            } else {
+                conn.rollback();
+            }
+
+           // conn.commit();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
 
     }
 
