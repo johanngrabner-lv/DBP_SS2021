@@ -83,12 +83,18 @@ public class MyMain {
         ArrayList<LovedGames> gamesForPlayer2 = p2.getMyLovedGames();
         */
 
+        /*
         Player p10 = dbHelper.getPlayerById(10);
+        Game g4 = dbHelper.getGameById(4);
+
+        p10.addLovedGame(g4);
+
         p10.fillLovedGames();
         System.out.println(p10.getMyLovedGames());
         p10.fillLovedGamesOOP();
         System.out.println(p10.getMyLovedGamesOOP());
-
+*/
+        Player most = dbHelper.getPlayerWithMostLovedGames();
 
 
     }

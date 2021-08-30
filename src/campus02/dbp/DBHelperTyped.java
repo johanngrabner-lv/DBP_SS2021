@@ -247,4 +247,26 @@ public class DBHelperTyped {
         return p;
     }
 
+    public Player getPlayerWithMostLovedGames(){
+        Player p =new Player();
+        String selectSQL="SELECT PlayerId, Count(*)\n" +
+                "FROM LovedGames\n" +
+                "GROUP BY PlayerId\n" +
+                "ORDER BY COUNT(*) DESC";
+
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement preparedStatement = conn.prepareStatement(selectSQL)) {
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+               int playerId= rs.getInt("PlayerId");
+               p= getPlayerById(playerId);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return p;
+
+    }
+
 }

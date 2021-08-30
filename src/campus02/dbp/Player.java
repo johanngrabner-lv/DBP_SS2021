@@ -134,9 +134,19 @@ public class Player {
     }
 
     public void addLovedGame(Game g){
-        String insSQL = "INSERT INTO LovedGames(PlayerID, GameId)";
+        String insSQL = "INSERT INTO LovedGames(LovedGamesId,PlayerID, GameId) VALUES(?,?,?)";
         //pStmt.setInt(1, getPlayerId());
         //pStmt.setInt(2, g.getGameId());
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement preparedStatement = conn.prepareStatement(insSQL)) {
+            preparedStatement.setInt(1, 10);
+            preparedStatement.setInt(2, PlayerId);
+            preparedStatement.setInt(3, g.getGameId());
+            int affectedRows = preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
 
     }
 
