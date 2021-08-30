@@ -97,12 +97,14 @@ public class MyMain {
         Player most = dbHelper.getPlayerWithMostLovedGames();
 
         Game g1 = new Game();
-        g1.setGameId(6);
+        g1.setGameId(4);
 
         Player pZehn=new Player();
         pZehn.setPlayerId(10);
 
-        int rank = dbHelper.joinLovedGame(g1, pZehn,0);
+       // int rank = dbHelper.joinLovedGame(g1, pZehn,0);
+
+        dbHelper.printMetdataData();
 
 
     }

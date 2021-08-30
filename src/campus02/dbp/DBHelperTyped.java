@@ -271,6 +271,7 @@ public class DBHelperTyped {
 
     public int joinLovedGame(Game g, Player p, int l) { //int lovedGames?
         String selectSQL = "";
+        boolean lastReadWasNull;
         int rank=0;
         selectSQL = "SELECT p.Nickname, l.Rank, g.GameName, l.Rank " +
                 "FROM LovedGames AS l " +
@@ -289,6 +290,9 @@ public class DBHelperTyped {
             ResultSet rs = stmt.executeQuery();
             if (rs.next()){
                 rank=rs.getInt("Rank");
+
+                lastReadWasNull = rs.wasNull();
+                System.out.println(lastReadWasNull);
             }
 
         } catch (SQLException e) {
@@ -296,6 +300,35 @@ public class DBHelperTyped {
         }
 
         return rank;
+    }
+
+    public void printMetdataData()
+    {
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Player")) {
+            ResultSet rs = stmt.executeQuery();
+
+            ResultSetMetaData  meta = rs.getMetaData();
+            int numerics = 0;
+
+            for ( int i = 1; i <= meta.getColumnCount(); i++ )
+            {
+                System.out.printf( "%-20s %-20s%n", meta.getColumnLabel( i ),
+                        meta.getColumnTypeName( i ) );
+
+                if ( meta.isSigned( i ) )
+                    numerics++;
+            }
+
+            System.out.println();
+            System.out.println( "Spalten: " + meta.getColumnCount() +
+                    ", Numerisch: " + numerics );
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+
     }
 
 
