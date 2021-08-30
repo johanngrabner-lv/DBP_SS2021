@@ -63,9 +63,24 @@ public class Player {
     private String Lastname;
     private String Nickname;
 
+    public ArrayList<LovedGames> getMyLovedGames() {
+        return myLovedGames;
+    }
+
+    public ArrayList<Game> getMyLovedGamesOOP() {
+        return myLovedGamesOOP;
+    }
+
+    public void setMyLovedGamesOOP(ArrayList<Game> myLovedGamesOOP) {
+        this.myLovedGamesOOP = myLovedGamesOOP;
+    }
+
+    private ArrayList<Game> myLovedGamesOOP;
+
+
     ArrayList<LovedGames> myLovedGames;
 
-    public ArrayList<LovedGames> getMyLovedGames() {
+    public void fillLovedGames() {
         if (myLovedGames==null)
             myLovedGames =new ArrayList<LovedGames>();
         else
@@ -77,12 +92,12 @@ public class Player {
             preparedStatement.setInt(1, PlayerId);
 
             ResultSet rs = preparedStatement.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 LovedGames g =new LovedGames();
                 g.setLovedGamesId(rs.getInt("LovedGamesId"));
                 g.setGameId(rs.getInt("GameId"));
                 g.setPlayerId(rs.getInt("PlayerId"));
-                g.setPlayDate(rs.getDate("PlayDate"));
+              //  g.setPlayDate(rs.getDate("PlayDate"));
 
                 myLovedGames.add(g);
 
@@ -92,7 +107,37 @@ public class Player {
         }
 
 
-        return myLovedGames;
+    }
+
+    public void fillLovedGamesOOP() {
+        if (myLovedGamesOOP==null)
+            myLovedGamesOOP =new ArrayList<Game>();
+        else
+            myLovedGamesOOP.clear();
+
+        DBHelperTyped dbHelper=new DBHelperTyped();
+        String sqlSelect = "SELECT * FROM LovedGames WHERE PlayerId = ?";
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement preparedStatement = conn.prepareStatement(sqlSelect)) {
+            preparedStatement.setInt(1, PlayerId);
+
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                Game g = dbHelper.getGameById(rs.getInt("GameId"));
+                myLovedGamesOOP.add(g);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+
+    }
+
+    public void addLovedGame(Game g){
+        String insSQL = "INSERT INTO LovedGames(PlayerID, GameId)";
+        //pStmt.setInt(1, getPlayerId());
+        //pStmt.setInt(2, g.getGameId());
+
     }
 
     public void setMyLovedGames(ArrayList<LovedGames> myLovedGames) {

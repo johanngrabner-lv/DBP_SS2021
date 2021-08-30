@@ -70,16 +70,25 @@ public class MyMain {
 
         int rowsAffected = dbHelper.incrementMaxLevelByXForGenreY(50,"Action");
 */
+        /*
         Player newPlayer =
                 new Player(0,"Luisa","De Franco","LF");
 
         Player pInserted = dbHelper.addPlayer(newPlayer);
-       // dbHelper.updatePlayer(newPlayer);
+        dbHelper.updatePlayer(newPlayer);
 
        // Player foundPlayer = dbHelper.getPlayerById(2);
 
         Player p2 = dbHelper.getPlayerById(2);
         ArrayList<LovedGames> gamesForPlayer2 = p2.getMyLovedGames();
+        */
+
+        Player p10 = dbHelper.getPlayerById(10);
+        p10.fillLovedGames();
+        System.out.println(p10.getMyLovedGames());
+        p10.fillLovedGamesOOP();
+        System.out.println(p10.getMyLovedGamesOOP());
+
 
 
     }

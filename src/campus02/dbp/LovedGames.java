@@ -7,6 +7,16 @@ public class LovedGames {
         return LovedGamesId;
     }
 
+    @Override
+    public String toString() {
+        return "LovedGames{" +
+                "LovedGamesId=" + LovedGamesId +
+                ", PlayerId=" + PlayerId +
+                ", GameId=" + GameId +
+                ", PlayDate=" + PlayDate +
+                '}';
+    }
+
     public void setLovedGamesId(int lovedGamesId) {
         LovedGamesId = lovedGamesId;
     }
