@@ -94,6 +94,7 @@ public class MyMain {
         p10.fillLovedGamesOOP();
         System.out.println(p10.getMyLovedGamesOOP());
 */
+        /*
         Player most = dbHelper.getPlayerWithMostLovedGames();
 
         Game g1 = new Game();
@@ -105,8 +106,21 @@ public class MyMain {
        // int rank = dbHelper.joinLovedGame(g1, pZehn,0);
 
         dbHelper.printMetdataData();
+        */
+        GameLanguagesAndAgeDAO gDAO =new GameLanguagesAndAgeDAO();
 
+       // gDAO.createTable();
+        //System.out.println("Table created!");
 
+        gDAO.setGameId(19);
+        gDAO.setNameDeutsch("Solitär");
+        gDAO.setNameSpanish("Solitario");
+        gDAO.setMinAge(5);
+
+        //gDAO.save();
+        System.out.println("17 Inserted");
+
+        gDAO.printInfo();
     }
 
     public static void createNewDatabase(String fileName) {
@@ -218,7 +232,7 @@ ON p.PlayerId=l.PlayerId
 
 //Aufgabenbeschreibung 30.08.2021
 
-
+/*
 Table:
 GameLanguagesAndAge
 
@@ -243,7 +257,7 @@ Falls NameXYZ NULL --> Ausgabe: Deutsch - "Eintrag unbekannt"
 Bitte auch die Metadatan für diese Tabelle ausgeben
 
 
-
+*/
 
 
 
