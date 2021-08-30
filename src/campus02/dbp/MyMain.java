@@ -276,6 +276,8 @@ Player 1 "schenkt" Player 4  insgesamt 30 Punkte
 Player 1: 70
 Player 2: 130
 
+--Ev. Sicherheitscheck, hat Player überhaupt genug Punkte
+
 UPDATE Player SET Points = Points - 30 Where PlayerId=1
 UPDATE Player SET Points = Points + 30 Where PlayerId=2
 
