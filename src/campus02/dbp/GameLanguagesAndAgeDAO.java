@@ -93,6 +93,7 @@ public class GameLanguagesAndAgeDAO {
             Connection conn = DriverManager.getConnection(connectionString);
             PreparedStatement stmt = conn.prepareStatement(insertSQL);
             PreparedStatement activateForeignKey = conn.prepareStatement(pragmaForeignKey);
+            conn.setAutoCommit(false);
             activateForeignKey.executeUpdate();
                     stmt.setInt(1, gameId);
                     stmt.setString(2, nameDeutsch);
@@ -108,6 +109,7 @@ public class GameLanguagesAndAgeDAO {
                     setGameLanguagesAndAgeId(autoincrementValue);
                     stmtAutoincrement.close();
                     rs.close();
+            conn.rollback();
                 } catch (SQLException ex) {
                 }
 

@@ -112,12 +112,12 @@ public class MyMain {
        // gDAO.createTable();
         //System.out.println("Table created!");
 
-        gDAO.setGameId(19);
+        gDAO.setGameId(5);
         gDAO.setNameDeutsch("Solitär");
         gDAO.setNameSpanish("Solitario");
         gDAO.setMinAge(5);
 
-        //gDAO.save();
+        gDAO.save();
         System.out.println("17 Inserted");
 
         //gDAO.printInfo();
