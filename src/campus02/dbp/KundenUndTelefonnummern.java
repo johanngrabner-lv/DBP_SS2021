@@ -74,11 +74,27 @@ public class KundenUndTelefonnummern {
             //pStmtInsTelefon.executeUpdate();
 
             ResultSet rs = stmtSelectMitJoin.executeQuery(joinKundeUndTelefon);
+            ResultSetMetaData meta =  rs.getMetaData();
 
+            System.out.println("\nMetdaten: \n Spalten: \n" + meta.getColumnCount() + "\n");
+            int numerics = 0;
+
+            for ( int i = 1; i <= meta.getColumnCount(); i++ )
+            {
+                System.out.printf( "%-20s %-20s%n", meta.getColumnLabel( i ),
+                        meta.getColumnTypeName( i ) );
+
+                if ( meta.isSigned( i ) )
+                    numerics++;
+            }
+            /*
             while(rs.next()){
                 System.out.println("Vorname: " + rs.getString("Vorname") + " Telefon: "
                         + rs.getString("Telefonnummer"));
-            }
+            }*/
+
+
+
 
 
 
