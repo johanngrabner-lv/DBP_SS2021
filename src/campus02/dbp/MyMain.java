@@ -293,6 +293,28 @@ wenn nicht, dann Transaction zurückrollen
 
  */
 
+//MetaData -- get Info about Tables and structure
+//NULL-Values rs.getDouble("Points") --> 0
+//if (rs.wasNull()) --> Points are undefined
+
+//Transactions All Or Nothing ACID
+
+//BEGIN TRANSACTION
+//COMMT
+//ROLLBACK
+
+//conn.setAutoCommit(false):
+
+
+//stmt.executeUpdate()--> first call, will start the Transaction auto
+
+//conn.commit();
+//conn.rollback();
+
+
+
+
+
 
 
 
