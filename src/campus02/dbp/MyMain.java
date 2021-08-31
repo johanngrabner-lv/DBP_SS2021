@@ -128,7 +128,11 @@ public class MyMain {
 
         */
      //   dbHelper.addPointsToPlayerAndInitialize();
-        dbHelper.transferPoints(1,5,70);
+       // dbHelper.transferPoints(1,5,70);
+
+        KundenUndTelefonnummern kt=new KundenUndTelefonnummern();
+        //kt.createTable();
+        kt.insertValues();
 
     }
 
